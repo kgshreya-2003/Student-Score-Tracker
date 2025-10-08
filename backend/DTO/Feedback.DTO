@@ -1,0 +1,6 @@
+﻿namespace StudentScoreTracker.API.DTO
+{
+    public class Feedback
+    {
+    }
+}
