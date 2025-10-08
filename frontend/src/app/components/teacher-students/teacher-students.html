@@ -1,0 +1,122 @@
+<h2 class="page-title">📘 Student Management</h2>
+
+<!-- Filters and Actions Container -->
+<div class="filters-actions-container">
+  <div class="filters">
+    <!-- Class Filter -->
+    <select class="form-select small-select" [(ngModel)]="selectedClass" (change)="fetchStudents()">
+      <option value="" disabled selected>Select Class</option>
+      <option *ngFor="let c of classes" [value]="c">{{ c }}</option>
+    </select>
+
+    <!-- Section Filter -->
+    <select class="form-select small-select" [(ngModel)]="selectedSection" (change)="fetchStudents()">
+      <option value="" disabled selected>Select Section</option>
+      <option *ngFor="let sec of sections" [value]="sec">{{ sec }}</option>
+    </select>
+
+    <!-- Name Search -->
+    <input
+      type="text"
+      class="form-control search-input"
+      placeholder="🔍 Search by name"
+      [(ngModel)]="searchText"
+    />
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-outline-success me-2" (click)="exportToExcel()">📥 Export</button>
+    <button class="btn btn-success" (click)="openModal()">➕ Add Student</button>
+  </div>
+</div>
+
+<!-- Loading / Error Messages -->
+<div *ngIf="isLoading" class="alert alert-info">⏳ Loading students...</div>
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+<!-- Students Table -->
+<table class="table table-striped table-hover" *ngIf="!isLoading && filteredStudents.length">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Class</th>
+      <th>Section</th>
+      <!-- Roll No. header removed -->
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of filteredStudents">
+      <td>{{ s.id }}</td>
+      <td>{{ s.name }}</td>
+      <td>{{ s.class }}</td>
+      <td>{{ s.section }}</td>
+      <!-- Roll No. cell removed -->
+      <td class="actions-cell">
+        <button class="btn btn-sm btn-warning" (click)="startEdit(s)">✏️ Edit</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteStudent(s.id)">🗑️ Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- No Students Found -->
+<div *ngIf="!isLoading && filteredStudents.length === 0" class="alert alert-warning">
+  No students found.
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg">
+      <div class="modal-header">
+        <h5 class="modal-title" id="studentModalLabel">
+          {{ editingStudent ? 'Edit Student' : 'Add Student' }}
+        </h5>
+        <button type="button" class="btn-close" (click)="cancel()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #addStudentForm="ngForm" (ngSubmit)="addStudent()">
+          <!-- Name -->
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              [(ngModel)]="newStudent.name"
+              name="name"
+              required
+            />
+          </div>
+
+          <!-- Class -->
+          <div class="mb-3">
+            <select class="form-control" [(ngModel)]="newStudent.class" name="class" required>
+              <option value="" disabled selected>Select Class</option>
+              <option *ngFor="let c of classes" [value]="c">{{ c }}</option>
+            </select>
+          </div>
+
+          <!-- Section -->
+          <div class="mb-3">
+            <select class="form-control" [(ngModel)]="newStudent.section" name="section" required>
+              <option value="" disabled selected>Select Section</option>
+              <option *ngFor="let sec of sections" [value]="sec">{{ sec }}</option>
+            </select>
+          </div>
+
+          <!-- Roll No. input removed -->
+
+          <!-- Buttons -->
+          <div class="text-end">
+            <button type="submit" class="btn btn-primary me-2" [disabled]="addStudentForm.invalid">
+              {{ editingStudent ? 'Update' : 'Save' }}
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

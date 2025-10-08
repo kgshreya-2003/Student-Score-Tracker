@@ -1,0 +1,85 @@
+<div class="feedback-page container mt-4">
+  <h2>📝 Teacher Feedback</h2>
+
+  <div class="row mb-3">
+    <div class="col">
+      <label>Class:</label>
+      <select [(ngModel)]="selectedClass" class="form-select">
+        <option value="">Select Class</option>
+        <option *ngFor="let c of classes" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+
+    <div class="col">
+      <label>Section:</label>
+      <select [(ngModel)]="selectedSection" class="form-select">
+        <option value="">Select Section</option>
+        <option *ngFor="let s of sections" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="col">
+      <label>Date:</label>
+      <input type="date" [(ngModel)]="selectedDate" class="form-control" />
+    </div>
+
+    <div class="col d-flex align-items-end">
+      <button (click)="fetchStudents()" class="btn btn-primary w-100">Fetch Students</button>
+    </div>
+  </div>
+
+  <table class="table table-bordered" *ngIf="students.length > 0">
+    <thead class="table-light">
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Feedback</th>
+        <th>Subject</th>
+        <th>Feedback Text</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.roll }}</td>
+        <td>{{ student.name }}</td>
+        <td>
+          <input
+            type="text"
+            [(ngModel)]="feedbacks[student.id].feedbacks"
+            class="form-control"
+            placeholder="Short feedback"
+            name="feedback{{ student.id }}"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            [(ngModel)]="feedbacks[student.id].subject"
+            class="form-control"
+            placeholder="Subject"
+            name="subject{{ student.id }}"
+          />
+        </td>
+        <td>
+          <textarea
+            [(ngModel)]="feedbacks[student.id].feedbackText"
+            class="form-control"
+            rows="2"
+            placeholder="Detailed feedback"
+            name="feedbackText{{ student.id }}"
+          ></textarea>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+ 
+  <button
+    *ngIf="students.length > 0"
+    (click)="submitFeedback()"
+    class="btn btn-success mt-3"
+    [disabled]="isSubmitting"
+  >
+    {{ isSubmitting ? 'Submitting...' : 'Submit Feedback' }}
+  </button>
+</div>

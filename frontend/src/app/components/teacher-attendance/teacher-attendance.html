@@ -1,0 +1,62 @@
+<div class="attendance-page container">
+  <h2>📅 Attendance Management</h2>
+
+  <!-- Filters -->
+  <div class="filters">
+    <div class="filter-item">
+      <label>Class:</label>
+      <select [(ngModel)]="selectedClass">
+        <option value="">Select</option>
+        <option *ngFor="let c of classes" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+
+    <div class="filter-item">
+      <label>Section:</label>
+      <select [(ngModel)]="selectedSection">
+        <option value="">Select</option>
+        <option *ngFor="let s of sections" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="filter-item">
+      <label>Date:</label>
+      <input type="date" [(ngModel)]="selectedDate" />
+    </div>
+
+    <button class="btn-primary" (click)="fetchStudents()">🔄 Load Students</button>
+  </div>
+
+  
+  <table class="attendance-table" *ngIf="students.length > 0">
+    <thead>
+      <tr>
+        <th>Roll</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.roll }}</td>
+        <td>{{ student.name }}</td>
+        <td>
+          <select [(ngModel)]="attendanceRecord[student.id]" class="status-select">
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+            <option value="Late">Late</option>
+          </select>
+        </td>
+        <td>
+          <button class="btn-update" (click)="updateAttendance(student.id)">✏️ Update</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="action-buttons" *ngIf="students.length > 0">
+    <button class="btn-success" (click)="markAllPresent()">✅ Mark All Present</button>
+    <button class="btn-submit" (click)="submitAttendance()">📤 Submit Attendance</button>
+  </div>
+</div>

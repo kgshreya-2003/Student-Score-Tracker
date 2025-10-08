@@ -1,0 +1,99 @@
+<div class="reports-page container mt-4">
+  <h2 class="mb-4 text-center text-success fw-bold">📊 Student Performance Reports</h2>
+
+  <div class="card shadow-sm mb-4 p-3">
+    <div class="row g-3 align-items-end">
+      <div class="col-md-3">
+        <label class="form-label fw-semibold">Class</label>
+        <select class="form-select" [(ngModel)]="selectedClass">
+          <option value="">Select Class</option>
+          <option *ngFor="let cls of classes" [value]="cls">{{ cls }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label fw-semibold">Section</label>
+        <select class="form-select" [(ngModel)]="selectedSection">
+          <option value="">Select Section</option>
+          <option *ngFor="let sec of sections" [value]="sec">{{ sec }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-3 d-grid">
+        <button class="btn btn-success" (click)="fetchStudents()" [disabled]="loadingStudents">
+          {{ loadingStudents ? 'Loading...' : 'Fetch Students' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+ 
+  <div *ngIf="students.length" class="card shadow-sm mb-4 p-3">
+    <div class="row g-3 align-items-end">
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Select Student</label>
+        <select class="form-select" [(ngModel)]="selectedStudent">
+          <option value="">Select Student</option>
+          <option *ngFor="let s of filteredStudents" [value]="s.name">{{ s.name }}</option>
+        </select>
+      </div>
+
+      <div class="col-md-2 d-grid">
+        <button class="btn btn-primary" (click)="generateReport()" [disabled]="loadingReport">
+          {{ loadingReport ? 'Generating...' : 'Generate Report' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div *ngIf="reportGenerated" id="reportContent" class="card shadow-sm p-4">
+    <h4 class="text-center mb-3 text-success fw-bold">
+      Report for {{ selectedStudent }}
+    </h4>
+    
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped align-middle text-center">
+        <thead class="table-success">
+          <tr>
+            <th>Subject</th>
+            <th>Grade</th>
+            <th>Attendance</th>
+            <th>Feedback</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of reportData">
+            <td>{{ row.subject }}</td>
+            <td [ngClass]="gradeColorClass(row.grade)">{{ row.grade }}</td>
+            <td>{{ row.attendance }}</td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="row.feedback"
+                placeholder="Enter feedback"
+                class="form-control"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  <div *ngIf="reportGenerated" class="text-center mt-4">
+    <button class="btn btn-outline-danger me-2" (click)="downloadPDF()">📄 Download PDF</button>
+    <button class="btn btn-outline-success me-2" (click)="downloadExcel()">📊 Download Excel</button>
+    <button class="btn btn-outline-primary" (click)="printReport()">🖨️ Print Report</button>
+  </div>
+
+  <!-- 🔹 Error Messages -->
+  <div *ngIf="errorLoadingStudents" class="alert alert-danger mt-3">
+    {{ errorLoadingStudents }}
+  </div>
+  <div *ngIf="errorLoadingReport" class="alert alert-danger mt-3">
+    {{ errorLoadingReport }}
+  </div>
+</div>

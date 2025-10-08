@@ -1,0 +1,260 @@
+/* === Global Styles === */
+body {
+  background-color: #ffffff; /* Page background white */
+  color: #212529;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* === Layout Wrapper === */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* === Sidebar Styling === */
+.sidebar {
+  background-color: #000000; /* Black background */
+  color: #ffffff;
+  width: 250px;
+  min-height: 100vh;
+  padding: 1.5rem 1rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar h2 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.sidebar a {
+  color: #f8f9fa;
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar a:hover {
+  background-color: #343a40;
+}
+
+/* === Main Content Styling === */
+.main-content {
+  margin-left: 250px; /* Match sidebar width */
+  padding: 2rem;
+  background-color: #ffffff;
+  flex-grow: 1;
+}
+
+/* === Page Title === */
+.page-title {
+  color: #212529;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  background-color: #f8f9fa;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  display: inline-block;
+  user-select: none;
+}
+
+/* === Filters and Actions === */
+.filters-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  margin-bottom: 1.5rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-grow: 1;
+  min-width: 300px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+/* Optional: Ensure buttons don't wrap internally */
+.actions button {
+  white-space: nowrap;
+}
+
+
+/* Select inputs styling */
+.form-select {
+  min-width: 130px;
+  max-width: 160px;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s ease;
+}
+
+.form-select:focus {
+  border-color: #198754;
+  outline: none;
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.5);
+}
+
+/* Search input styling */
+.search-input {
+  flex-grow: 1;
+  min-width: 180px;
+  max-width: 280px;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #198754;
+  outline: none;
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.5);
+}
+
+/* Buttons inside filters, next to search */
+.filters button {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 0.375rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filters button.btn-outline-success {
+  color: #198754;
+  background-color: transparent;
+  border-color: #198754;
+}
+
+.filters button.btn-outline-success:hover {
+  background-color: #198754;
+  color: white;
+}
+
+.filters button.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+  color: white;
+}
+
+.filters button.btn-success:hover {
+  background-color: #145c32;
+  border-color: #145c32;
+  color: white;
+}
+
+/* Remove the separate .actions container styling (optional) */
+
+/* === Table Styling === */
+.table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+}
+
+.table thead {
+  background-color: #198754;
+  color: white;
+  font-weight: 600;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #d1e7dd;
+  cursor: pointer;
+}
+
+.table td > button {
+  display: inline-block;
+  margin-right: 0.25rem;
+  min-width: 60px;
+  font-size: 0.85rem;
+  padding: 0.25rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
+  color: #212529;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #bb2d3b;
+  border-color: #b02a37;
+}
+
+/* === Modal Header === */
+.modal-header {
+  background-color: #198754;
+  color: white;
+  font-weight: 700;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .filters-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters {
+    justify-content: center;
+  }
+
+  .search-input {
+    max-width: 100%;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+  }
+}

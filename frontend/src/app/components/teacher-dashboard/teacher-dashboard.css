@@ -1,0 +1,353 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffffff; /* White background */
+  overflow-x: hidden;
+  color: #212529; /* Dark text for contrast */
+}
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin-left: -200px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background-color: #000000; /* Sidebar stays black */
+  color: #fff;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #1a1a1a;
+}
+
+.sidebar-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00e676;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #00e676;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* Sidebar Nav */
+.sidebar nav ul {
+  padding: 1rem 0;
+}
+
+.sidebar nav li {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  color: #fff;
+}
+
+.sidebar nav li:hover {
+  background-color: #343a40;
+  color: #00e676;
+}
+
+.sidebar nav li i {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.sidebar.collapsed nav li span {
+  display: none;
+}
+
+.sidebar nav li.active {
+  background-color: #00e676;
+  color: #0f0f0f;
+}
+
+/* Make logout menu item red */
+.logout-item {
+  color: red;
+  cursor: pointer; /* show pointer on hover */
+}
+
+.logout-item i {
+  color: red; /* Make icon red too */
+}
+
+/* Hover effect: darker red */
+.logout-item:hover {
+  color: darkred;
+}
+
+.logout-item:hover i {
+  color: darkred;
+}
+
+/* Main Section */
+.main-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Navbar */
+.top-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff; /* Light navbar */
+  color: #212529;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #00b894;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-item {
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #212529;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #00b894;
+}
+
+.profile-pic img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00b894;
+  transition: transform 0.3s ease;
+}
+
+.profile-pic img:hover {
+  transform: scale(1.05);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background-color: #ffffff; /* White background */
+}
+
+.dashboard-content h1 {
+  color: #212529;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #00b894;
+}
+
+.card p {
+  font-size: 1.4rem;
+  color: #212529;
+}
+
+.card ul li {
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+  color: #555;
+}
+
+/* Scrollbar */
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+.main-content::-webkit-scrollbar-thumb {
+  background-color: #00b894;
+  border-radius: 4px;
+}
+
+/* Lively Cards */
+.lively-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.image-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85);
+  transition: filter 0.3s ease;
+}
+
+.image-card:hover img {
+  filter: brightness(1);
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  padding: 1rem;
+  color: white;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.6));
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-overlay h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.card-overlay p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* Dashboard Layout */
+.dashboard-layout {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Sidebar Section (Right panel) */
+.sidebar-section {
+  flex: 1;
+  background-color: #fefefe;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: #2c3e50;
+}
+
+.sidebar-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #00b894;
+  padding-bottom: 0.3rem;
+}
+
+.sidebar-section ul {
+  list-style: none;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar in sidebar */
+.sidebar-section ul::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-section ul::-webkit-scrollbar-thumb {
+  background-color: #00b894;
+  border-radius: 3px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 900px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+  
+  .sidebar-section {
+    max-height: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    height: 100%;
+  }
+
+  .main-section {
+    margin-left: 0 !important;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .top-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

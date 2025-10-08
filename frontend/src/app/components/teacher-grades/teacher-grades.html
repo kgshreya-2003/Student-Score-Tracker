@@ -1,0 +1,98 @@
+<div class="filter-panel container mt-4 p-3 border rounded bg-light shadow-sm">
+   <h2>📝 Grade Allocation </h2>  
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <label>Class:</label>
+      <select [(ngModel)]="selectedClass" class="form-select" (change)="onClassChange()">
+        <option value="">Select Class</option>
+        <option *ngFor="let c of classes" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label>Section:</label>
+      <select [(ngModel)]="selectedSection" class="form-select" [disabled]="!selectedClass" (change)="onSectionChange()">
+        <option value="">Select Section</option>
+        <option *ngFor="let s of sections" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label>Date:</label>
+      <input type="date" [(ngModel)]="selectedDate" class="form-control" />
+    </div>
+
+    <div class="col-md-3 d-flex align-items-end">
+      <button (click)="fetchStudents()" class="btn btn-primary w-100">Fetch Students</button>
+    </div>
+  </div>
+
+  <div *ngIf="students.length > 0" class="mt-4">
+    <h5 class="fw-bold mb-3">🎓 Enter Marks for Students</h5>
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark text-center">
+        <tr>
+          <th>Roll</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Marks</th>
+          <th>Grade</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.roll || '-' }}</td>
+          <td>{{ student.name }}</td>
+          <td>
+            <select [(ngModel)]="student.subject" class="form-select">
+              <option value="" disabled>Select Subject</option>
+              <option *ngFor="let subject of subjects" [value]="subject">{{ subject }}</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              [(ngModel)]="student.marks"
+              class="form-control text-center"
+              (input)="assignGrade(student)"
+              min="0"
+              max="100"
+            />
+          </td>
+          <td class="text-center">
+            <span [ngClass]="{
+              'text-success fw-bold': student.grade === 'A+',
+              'text-primary fw-bold': student.grade === 'A',
+              'text-info fw-bold': student.grade === 'B+',
+              'text-warning fw-bold': student.grade === 'B',
+              'text-danger fw-bold': student.grade === 'C'
+            }">
+              {{ student.grade || '-' }}
+            </span>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-success" (click)="saveStudentMark(student)">Save</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="students.length > 0" class="container mt-5">
+  <h5 class="fw-bold mb-3">📊 Student Performance Charts</h5>
+  <div class="row">
+    <div class="col-md-6 mb-4" *ngFor="let student of students">
+      <div class="card shadow-sm border-0 p-3">
+        <h6 class="text-center">{{ student.name }}'s Performance</h6>
+        <canvas
+          baseChart
+          [data]="student.chartData"
+          [options]="pieChartOptions"
+          chartType="pie">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

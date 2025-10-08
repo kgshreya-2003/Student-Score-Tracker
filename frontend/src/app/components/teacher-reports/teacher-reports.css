@@ -1,0 +1,51 @@
+.reports-page {
+  max-width: 1100px;
+}
+
+h2 {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.card {
+  border-radius: 12px;
+  background: #fff;
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th {
+  background-color: #198754 !important;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.grade-a {
+  background-color: #d1e7dd;
+  font-weight: bold;
+}
+
+.grade-b {
+  background-color: #fff3cd;
+  font-weight: bold;
+}
+
+.grade-c {
+  background-color: #f8d7da;
+  font-weight: bold;
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+canvas {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}

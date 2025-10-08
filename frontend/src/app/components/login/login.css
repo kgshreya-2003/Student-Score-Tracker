@@ -1,0 +1,100 @@
+/* Fullscreen white background and centering */
+.login-page {
+  height: 100vh;
+  width: 100%;
+  background-color: #ffffff; /* White background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login Card: Black Background */
+.login-card {
+  background-color: #000000; /* Black background */
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  color: #ffffff; /* White text for contrast */
+}
+
+.login-card h2 {
+  font-size: 2rem;
+  color: #2ecc71; /* Green accent title */
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #cccccc;
+  margin-bottom: 2rem;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #dddddd;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #222; /* Dark input background */
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.form-group input::placeholder {
+  color: #999999;
+}
+
+/* Button */
+button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2ecc71; /* Green */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #27ae60;
+}
+
+/* Extra Links */
+.extra-links {
+  margin-top: 1rem;
+}
+
+.extra-links a {
+  color: #2ecc71;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.footer a {
+  color: #2ecc71;
+  text-decoration: none;
+  font-weight: 500;
+}

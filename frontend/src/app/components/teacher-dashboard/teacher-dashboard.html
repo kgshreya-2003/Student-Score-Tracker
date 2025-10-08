@@ -1,0 +1,98 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside [ngClass]="{'collapsed': isCollapsed}" class="sidebar">
+    <div class="sidebar-header">
+      <h2 *ngIf="!isCollapsed" class="sidebar-title">Teacher</h2>
+      <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+    </div>
+
+    <nav>
+      <ul>
+        <li (click)="selectMenu('dashboard')" [class.active]="activeMenu === 'dashboard'">
+          <i class="bi bi-speedometer2"></i>
+          <span *ngIf="!isCollapsed">Dashboard</span>
+        </li>
+        <li (click)="selectMenu('students')" [class.active]="activeMenu === 'students'">
+          <i class="bi bi-people"></i>
+          <span *ngIf="!isCollapsed">Students</span>
+        </li>
+        <li (click)="selectMenu('grades')" [class.active]="activeMenu === 'grades'">
+          <i class="bi bi-journal-text"></i>
+          <span *ngIf="!isCollapsed">Grades</span>
+        </li>
+        <li (click)="selectMenu('attendance')" [class.active]="activeMenu === 'attendance'">
+          <i class="bi bi-calendar-check"></i>
+          <span *ngIf="!isCollapsed">Attendance</span>
+        </li>
+        <li (click)="selectMenu('feedback')" [class.active]="activeMenu === 'feedback'">
+          <i class="bi bi-chat-left-text"></i>
+          <span *ngIf="!isCollapsed">Feedback</span>
+        </li>
+        <li (click)="selectMenu('reports')" [class.active]="activeMenu === 'reports'">
+          <i class="bi bi-file-earmark-text"></i>
+          <span *ngIf="!isCollapsed">Reports</span>
+        </li>
+      <<li class="logout-item" (click)="selectMenu('logout')" [class.active]="activeMenu === 'logout'">
+  <i class="bi bi-box-arrow-right"></i>
+  <span *ngIf="!isCollapsed">Logout</span>
+</li>
+      </ul>
+    </nav>
+  </aside>
+
+ 
+  <div class="main-section">
+
+<main class="main-content">
+  <ng-container [ngSwitch]="activeMenu">
+    <div *ngSwitchCase="'dashboard'" class="dashboard-content">
+      <h1>Welcome, Teacher 👩‍🏫</h1>
+      <div class="cards lively-cards">
+
+        <div class="card image-card">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80" alt="Classroom" />
+          <div class="card-overlay">
+            <h3>Total Students</h3>
+            <p>120</p>
+          </div>
+        </div>
+
+        <div class="card image-card">
+          <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Attendance" />
+          <div class="card-overlay">
+            <h3>Average Attendance</h3>
+            <p>87%</p>
+          </div>
+        </div>
+
+        <div class="card image-card">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Top Performers" />
+          <div class="card-overlay">
+            <h3>Top Performers</h3>
+           
+          </div>
+        </div>
+
+        <div class="card image-card">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" alt="Feedback" />
+          <div class="card-overlay">
+            <h3>Recent Feedback</h3>
+            <p>"Excellent participation" & "Needs improvement in experiments"</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+=
+
+
+        <app-teacher-students *ngSwitchCase="'students'"></app-teacher-students>
+        <app-teacher-grades *ngSwitchCase="'grades'"></app-teacher-grades>
+        <app-teacher-attendance *ngSwitchCase="'attendance'"></app-teacher-attendance>
+        <app-teacher-feedback *ngSwitchCase="'feedback'"></app-teacher-feedback>
+        <app-teacher-reports *ngSwitchCase="'reports'"></app-teacher-reports>
+        <div *ngSwitchCase="'logout'"><h2>Logging out...</h2></div>
+      </ng-container>
+    </main>
+  </div>
+</div>
